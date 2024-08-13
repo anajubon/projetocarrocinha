@@ -25,6 +25,7 @@ CREATE TABLE pessoa
     email       VARCHAR(100),
     endereco    VARCHAR(100),
     bairro      VARCHAR(100),
+    senha       VARCHAR(050);
     id_cidade   INT,
     cep         CHAR(9),
     PRIMARY KEY(id),
@@ -39,6 +40,7 @@ CREATE TABLE animal
     especie     VARCHAR(100),
     raca        VARCHAR(100),
     data_nascimento     DATE,
+    foto        VARCHAR(100);
     castrado   BOOL,
     id_pessoa   INT,
     PRIMARY KEY(id),

@@ -46,7 +46,7 @@
     </div>
     <section>
         <div class="principal">
-            <h1>Deletar cidade</h1>
+            <h1>Deletar animal</h1>
             <?php
             include('../includes/conexao.php');
             $id = $_GET['id'];

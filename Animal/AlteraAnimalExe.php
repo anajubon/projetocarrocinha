@@ -1,5 +1,14 @@
 <?php
 include('../includes/conexao.php');
+ //UPLOAD FOTO
+ $nome_foto = "";
+ if(file_exists($_FILES['foto']['tmp_name'])){
+ $pasta_destino = 'fotos/';
+ $extensao = strtolower(substr($_FILES['foto']['name'],-4));
+ $nome_foto = $pasta_destino . date('Ymd-His').$extensao;
+ move_uploaded_file($_FILES['foto']['tmp_name'],$nome_foto);
+ }
+ //FIM UPLOAD
 $id = $_POST['id'];
 $nome = $_POST['nome'];
 $especie = $_POST['especie'];
@@ -56,7 +65,7 @@ $pessoa = $_POST['pessoa'];
     </div>
     <section>
         <div class="principal">
-            <h1>Alteração de cidade</h1>
+            <h1>Alteração de animal</h1>
             <?php
             $dataNascimentoFormatada = date('Y-m-d', strtotime($dataNascimento));
             $dataAtual = new DateTime();
@@ -71,7 +80,13 @@ $pessoa = $_POST['pessoa'];
             echo "<p>Idade: $idade</p>";
             echo "<p>castrado: $castrado</p>";
             echo "<p>Id Pessoa: $pessoa";
-            $sql = "UPDATE animal SET nome = '$nome', especie = '$especie', raca = '$raca', data_nascimento = '$dataNascimentoFormatada', castrado = $castrado, id_pessoa = $pessoa WHERE id = $id";
+            $sql = "";
+            if($nome_foto == "")
+                $sql = "UPDATE animal SET nome = '$nome', especie = '$especie', raca = '$raca', data_nascimento = '$dataNascimentoFormatada', castrado = $castrado, id_pessoa = $pessoa WHERE id = $id";
+          
+            else
+                $sql = "UPDATE animal SET foto= '$nome_foto', nome = '$nome', especie = '$especie', raca = '$raca', data_nascimento = '$dataNascimentoFormatada', castrado = $castrado, id_pessoa = $pessoa WHERE id = $id";
+    
             $result = mysqli_query($con, $sql);
             if ($result)
                 echo "Dados atualizados!";
